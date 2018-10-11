@@ -70,6 +70,7 @@ $categories = Order\Category::all();
         </div>
         <div class="col-md-6 product">
             {{--<form action="{{ url('cart/addCart') }}" method="POST">--}}
+            {{--{!! Form::open(['route' => 'cart.store']) !!}--}}
             {!! Form::open(['route' => 'cart.store']) !!}
             {!! csrf_field() !!}
             @if(!empty( Voyager::image( $product->image ) ))

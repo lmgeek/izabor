@@ -94,6 +94,11 @@ Route::get('category/{id}', function($id){
 /**
 * Route Cart
 */
+//Route::get('/cart', 'Carts@index')->name('cart.index');
+//Route::patch('/cart/{product}', 'Carts@update')->name('cart.update');
+//Route::post('/cart/{product}', 'Carts@store')->name('cart.store');
+//Route::patch('/cart/{product}', 'Carts@update')->name('cart.update');
+//Route::delete('/cart/{product}', 'Carts@destroy')->name('cart.destroy');
 
 Route::resource('cart','Carts');
 Route::get('empty',function(){

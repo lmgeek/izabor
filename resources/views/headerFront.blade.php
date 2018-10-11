@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description" content="iZabor - Opción que complace su paladar">
     <meta name="og:description" content="Pide comida a domicilio con iZabor. Tus menús favoritos a solo unos clics de distancia y sin salir de casa. Tú pides, nosotros lo llevamos.">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>
         @if( isset($product) )
             iZabor | {{ ucwords($product->name) }}
@@ -30,6 +31,7 @@
     @endif
     {{--<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.js"></script>--}}
     <script src="//cdn.bootcss.com/toastr.js/latest/js/toastr.js"></script>
+
     <link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/toastr.js/latest/css/toastr.css">
     {{--<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">--}}
     {{--<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">--}}

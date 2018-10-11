@@ -31,6 +31,9 @@ $subtotal = 0;
         border: none;
         background: transparent;
     }
+    .final {
+        font-weight: 600;
+    }
 
     .no-articles {
         margin: 150px auto;
@@ -127,7 +130,12 @@ $subtotal = 0;
                                 <input type="hidden" class="price" value="{{ $item->model->price }}" id="price"
                                        name="price">
                                 <div class="input-group text-center">
-                                    {{ $item->qty }}
+{{--                                    {{ $item->qty }}--}}
+                                    <select class="quantity form-control" data-id="{{ $item->rowId }}" data-productQuantity="{{ $item->model->quantity }}">
+                                        @for ($i = 1; $i < 10 + 1 ; $i++)
+                                            <option {{ $item->qty == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                        @endfor
+                                    </select>
                                     {{--<span class="input-group-btn">--}}
                                         {{--<button type="button" class="btn btn-default btn-number" data-type="minus"--}}
                                                 {{--data-field="quantity[1]" style="margin-top: 0px; padding: 5px 10px;">--}}
@@ -171,7 +179,7 @@ $subtotal = 0;
                         <b>Subtotal</b><br>
                         <b>Tax (13%)</b><br>
                         <b>Costo envío</b><br>
-                        <b>Total</b>
+                        <b class="final">Total</b>
                     </td>
                     <td>
                         <?php
@@ -182,7 +190,9 @@ $subtotal = 0;
                         &#36;{{ Cart::subtotal() }}<br>
                         &#36;{{ Cart::tax() }}<br>
                         &#36;{{ $ShippingCost }}<br>
-                        &#36;{{ str_replace('.', ',', $total) }}
+                        <div class="final">
+                            &#36;{{ str_replace('.', ',', $total) }}
+                        </div>
                         <input type="hidden" readonly="" class="total" value="{{ config('cart.ShippingCost') }}" id="envio"><br>
                     </td>
                     <td></td>
@@ -219,99 +229,135 @@ $subtotal = 0;
 
 @include('footer')
 
-<script>
-    $(document).ready(function () {
-        $('.btn-number').click(function (e) {
-            e.preventDefault();
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        // (function(){
+        //     alert('hi')
+        // })();
+        (function(){
+            const classname = document.querySelectorAll('.quantity')
 
-            fieldName = $(this).attr('data-field');
-            type = $(this).attr('data-type');
-            var input = $("input[name='" + fieldName + "']");
-            var currentVal = parseInt(input.val());
-            m1 = document.getElementById("price").value;
-            envio = document.getElementById("envio").value;
+            Array.from(classname).forEach(function(element) {
+                element.addEventListener('change', function() {
+                    const id = element.getAttribute('data-id')
+                    const productQuantity = element.getAttribute('data-productQuantity')
 
-            if (type == "minus") {
-                var inputminus = $(this).parent().next();
-                var subtotal = $(this).parent().parent().parent().next();
-                if (parseInt(inputminus.val()) != 0) {
-                    inputminus.val(parseInt(inputminus.val()) - 1);
-                    console.log(subtotal);
+                    axios.patch(`/cart/${id}`, {
+                        quantity: this.value,
+                        productQuantity: productQuantity
+                    })
+                        .then(function (response) {
+                            // console.log(response);
+                            window.location.href = '{{ route('cart.index') }}'
+                        })
+                        .catch(function (error) {
+                            // console.log(error);
+                            window.location.href = '{{ route('cart.index') }}'
+                        });
+                })
+            })
+        })();
 
-                    subtotal = parseFloat(subtotal) * parseInt(input.val());
+
+        $(document).ready(function () {
+            $('.btn-number').click(function (e) {
+                e.preventDefault();
+
+                fieldName = $(this).attr('data-field');
+                type = $(this).attr('data-type');
+                var input = $("input[name='" + fieldName + "']");
+                var currentVal = parseInt(input.val());
+                m1 = document.getElementById("price").value;
+                envio = document.getElementById("envio").value;
+
+                if (type == "minus") {
+                    var inputminus = $(this).parent().next();
+                    var subtotal = $(this).parent().parent().parent().next();
+                    if (parseInt(inputminus.val()) != 0) {
+                        inputminus.val(parseInt(inputminus.val()) - 1);
+                        console.log(subtotal);
+
+                        subtotal = parseFloat(subtotal) * parseInt(input.val());
+                        document.getElementById("subtotal").value = subtotal;
+
+                        total = parseFloat(subtotal) + parseFloat(envio);
+                        document.getElementById("total").value = total;
+                    }
+                }
+                else {
+                    var input = $(this).parent().prev();
+                    var inputQty = parseInt(input.val());
+                    input.val(inputQty + 1);
+
+                    subtotal = parseFloat(m1) * parseInt(input.val());
                     document.getElementById("subtotal").value = subtotal;
 
                     total = parseFloat(subtotal) + parseFloat(envio);
                     document.getElementById("total").value = total;
+
                 }
-            }
-            else {
-                var input = $(this).parent().prev();
-                var inputQty = parseInt(input.val());
-                input.val(inputQty + 1);
 
-                subtotal = parseFloat(m1) * parseInt(input.val());
-                document.getElementById("subtotal").value = subtotal;
-
-                total = parseFloat(subtotal) + parseFloat(envio);
-                document.getElementById("total").value = total;
-
-            }
-
-            // console.log($(this).parent().prev().val());
+                // console.log($(this).parent().prev().val());
 
 
-            // if (!isNaN(currentVal)) {
-            //   if (type == 'minus') {
+                // if (!isNaN(currentVal)) {
+                //   if (type == 'minus') {
 
-            //     if (currentVal > input.attr('min')) {
-            //       input.val(currentVal - 1).change();
-            //     }
-            //     if (parseInt(input.val()) == input.attr('min')) {
-            //       $(this).attr('disabled', true);
-            //     }
+                //     if (currentVal > input.attr('min')) {
+                //       input.val(currentVal - 1).change();
+                //     }
+                //     if (parseInt(input.val()) == input.attr('min')) {
+                //       $(this).attr('disabled', true);
+                //     }
 
-            //   } else if (type == 'plus') {
+                //   } else if (type == 'plus') {
 
-            //     if (currentVal < input.attr('max')) {
-            //       input.val(currentVal + 1).change();
-            //     }
-            //     if (parseInt(input.val()) == input.attr('max')) {
-            //       $(this).attr('disabled', true);
-            //     }
+                //     if (currentVal < input.attr('max')) {
+                //       input.val(currentVal + 1).change();
+                //     }
+                //     if (parseInt(input.val()) == input.attr('max')) {
+                //       $(this).attr('disabled', true);
+                //     }
 
-            //   }
-            // } else {
-            //   input.val(0);
-            // }
-        });
-        $('.input-number').focusin(function () {
-            $(this).data('oldValue', $(this).val());
-        });
-        $('.input-number').change(function () {
+                //   }
+                // } else {
+                //   input.val(0);
+                // }
+            });
+            $('.input-number').focusin(function () {
+                $(this).data('oldValue', $(this).val());
+            });
+            $('.input-number').change(function () {
 
-            minValue = parseInt($(this).attr('min'));
-            maxValue = parseInt($(this).attr('max'));
-            valueCurrent = parseInt($(this).val());
+                minValue = parseInt($(this).attr('min'));
+                maxValue = parseInt($(this).attr('max'));
+                valueCurrent = parseInt($(this).val());
 
 
-            name = $(this).attr('name');
-            if (valueCurrent >= minValue) {
-                $(".btn-number[data-type='minus'][data-field='" + name + "']").removeAttr('disabled')
-            } else {
-                alert('Sorry, the minimum value was reached');
-                $(this).val($(this).data('oldValue'));
-            }
-            if (valueCurrent <= maxValue) {
-                $(".btn-number[data-type='plus'][data-field='" + name + "']").removeAttr('disabled')
-            } else {
-                alert('Sorry, the maximum value was reached');
-                $(this).val($(this).data('oldValue'));
-            }
+                name = $(this).attr('name');
+                if (valueCurrent >= minValue) {
+                    $(".btn-number[data-type='minus'][data-field='" + name + "']").removeAttr('disabled')
+                } else {
+                    alert('Sorry, the minimum value was reached');
+                    $(this).val($(this).data('oldValue'));
+                }
+                if (valueCurrent <= maxValue) {
+                    $(".btn-number[data-type='plus'][data-field='" + name + "']").removeAttr('disabled')
+                } else {
+                    alert('Sorry, the maximum value was reached');
+                    $(this).val($(this).data('oldValue'));
+                }
+
+
+            });
 
 
         });
+    </script>
+
+    <!-- Include AlgoliaSearch JS Client and autocomplete.js library -->
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
+    {{--<script src="{{ asset('js/algolia.js') }}"></script>--}}
 
 
-    });
-</script>

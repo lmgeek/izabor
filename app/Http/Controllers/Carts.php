@@ -6,6 +6,7 @@ namespace Order\Http\Controllers;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Order\Product;
 use Exception;
 // use Order\Cart;
@@ -65,6 +66,36 @@ class Carts extends Controller
          return Redirect::to('cart')->with('success_message', '¡El artículo fue agregado a su carrito!');
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+//        $validator = Validator::make($request->all(), [
+//            'quantity' => 'required|numeric|between:1,5'
+//        ]);
+//
+//        if ($validator->fails()) {
+//            session()->flash('errors', collect(['Quantity must be between 1 and 5.']));
+//            return response()->json(['success' => false], 500);
+//        }
+//
+//        if ($request->quantity > $request->productQuantity) {
+//            session()->flash('errors', collect(['We currently do not have enough items in stock.']));
+//            return response()->json(['success' => false], 400);
+//        }
+//
+        Cart::update($id, $request->quantity);
+        session()->flash('success_message', 'Ha actualizado la cantidad del plato');
+        return response()->json(['success' => true]);
+
+//        return $request->all();
+    }
+
 
     /**
      * Switch item for shopping cart to Save for Later.
@@ -95,7 +126,16 @@ class Carts extends Controller
 
 
 
-
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        return view('cart');
+    }
 
 
 
