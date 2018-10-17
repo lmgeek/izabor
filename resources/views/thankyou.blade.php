@@ -39,8 +39,8 @@
    <p>Un mensaje con los datos de tu compra ha sido enviado</p>
    <div class="spacer"></div>
    <div>
-       <a href="{{ url('/') }}" class="btn btn-danger"><i class="fas fa-home"></i> Inicio</a>&nbsp;
-       <a href="{{ url('/') }}" class="btn btn-danger"> <i class="fas fa-motorcycle"></i> Status Pedido</a>
+       <a href="{{ route('index') }}" class="btn btn-danger"><i class="fas fa-home"></i> Inicio</a>&nbsp;
+       <a href="{{ route('status.status', ['order' => $order]) }}" class="btn btn-danger"> <i class="fas fa-motorcycle"></i> Status Pedido</a>
    </div>
 </div>
 

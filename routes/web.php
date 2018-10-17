@@ -23,7 +23,7 @@ Route::get('/', function () {
      return view('welcome', compact('posts','products'));
 //    return view('welcome');
 })->name('index');
-Route::get('contacto', function(){
+Route::get('/contacto', function(){
     return view('contacto');
 });
 
@@ -42,10 +42,10 @@ Auth::routes();
 /**
 * Registro usuario
 */
-Route::get('register', [
+Route::get('/register', [
     'as' => 'register', 'uses' => 'Auth\RegisterController@create'
 ]);
-Route::post('register', [
+Route::post('/register', [
     'as' => 'register', 'uses' => 'Auth\RegisterController@create'
 ]);
 
@@ -70,7 +70,7 @@ Route::get('post/{slug}', function($slug){
 /**
 * Products
 */
-Route::get('plato/{id}', function($id){
+Route::get('/plato/{id}', function($id){
     $product = Order\products::where('id', '=', $id)->firstOrFail();
     return view('products', compact('product'));
 });
@@ -81,7 +81,7 @@ Route::get('plato/{id}', function($id){
 /**
 * Categories
 */
-Route::get('category/{id}', function($id){
+Route::get('/category/{id}', function($id){
 //    SELECT * FROM products as p INNER JOIN categories as c WHERE c.id = 1
     $category = DB::select( DB::raw('SELECT * FROM products WHERE category_id = '.$id) );
 //    $category = Order\products::where('category_id', '=', $id)->firstOrFail();
@@ -100,16 +100,16 @@ Route::get('category/{id}', function($id){
 //Route::patch('/cart/{product}', 'Carts@update')->name('cart.update');
 //Route::delete('/cart/{product}', 'Carts@destroy')->name('cart.destroy');
 
-Route::resource('cart','Carts');
-Route::get('empty',function(){
+Route::resource('/cart','Carts');
+Route::get('/empty',function(){
     Cart::destroy();
 });
-Route::resource('delete', 'Carts');
+Route::resource('/delete', 'Carts');
 
-Route::post('process', function () {
+Route::post('/process', function () {
     return view('cart');
 });
-Route::get('sales', function () {
+Route::get('/sales', function () {
     return view('sales');
 });
 
@@ -119,7 +119,8 @@ Route::get('sales', function () {
  */
 Route::get('/checkout','CheckoutController@index')->name('checkout.index');
 Route::post('/checkout-order','CheckoutController@store')->name('checkout.store');
-Route::get('/thankyou', 'ConfirmationController@index')->name('confirmation.index');
+Route::get('/thankyou/{order}', 'ConfirmationController@index')->name('confirmation.index');
+Route::get('/status','ConfirmationController@status')->name('status.status');
 
 
 
@@ -132,6 +133,6 @@ Route::get('/profile', 'HomeController@profile')->name('profile');
 /**
  * email
  */
-Route::get('emailtest', function (){
+Route::get('/emailtest', function (){
     return view('email');
 })->name('emailtest');

@@ -63,14 +63,14 @@ class CheckoutController extends Controller
             $order = $this->addToOrdersTables($data, null);
 
              Mail::send(new OrderPlaced($order));
-             Mail::send(new OrderPlaced($order));
+//             Mail::send(new OrderPlaced($order));
 
             // decrease the quantities of all the products in the cart
             // $this->decreaseQuantities();
 
             Cart::instance('default')->destroy();
 
-            return redirect()->route('confirmation.index')->with('success_message', '¡Gracias! Su pedido se ha realizado con éxito!');
+            return redirect()->route('confirmation.index',[$order->id])->with('success_message', '¡Gracias! Su pedido se ha realizado con éxito!');
 
         } catch (CardErrorException $e) {
             $this->addToOrdersTables($request, $e->getMessage());

@@ -3,6 +3,8 @@
 namespace Order\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Order\Order;
 
 class HomeController extends Controller
 {
@@ -33,7 +35,10 @@ class HomeController extends Controller
      */
     public function profile()
     {
-        return view('profile');
+        $user = Auth::User();
+        $orders = Order::where('user_id','=',$user->id)->get();
+//        dd($orders);
+        return view('user.profile', ['orders' => $orders]);
     }
 
     /**

@@ -22,12 +22,12 @@
 <body class="login">
 
 
-<div class="container-fluid">
+<div class="container-fluid" style="height: 100% !important;">
     <div class="row">
         <div class="faded-bg animated"></div>
-        <div class=" col-sm-7 col-md-8">
+        <div class=" col-sm-7 col-md-12">
             <div class="clearfix">
-                <div class="col-sm-12 col-md-10 col-md-offset-2">
+                <div class="col-sm-12 col-md-12 col-md-offset-2">
                     <div class="logo-title-container">
 
                         <div class="copy animated fadeIn text-center">

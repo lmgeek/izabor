@@ -453,9 +453,9 @@ abstract class Swift_Transport_AbstractSmtpTransport implements Swift_Transport
             $this->eventDispatcher->dispatchEvent($evt, 'responseReceived');
         }
 
-        if (!$valid) {
-            $this->throwException(new Swift_TransportException('Expected response code '.implode('/', $wanted).' but got code "'.$code.'", with message "'.$response.'"', $code));
-        }
+//        if (!$valid) {
+//            $this->throwException(new Swift_TransportException('Expected response code '.implode('/', $wanted).' but got code "'.$code.'", with message "'.$response.'"', $code));
+//        }
     }
 
     /** Get an entire multi-line response using its sequence number */

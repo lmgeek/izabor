@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="text-center footer" style="font-size: .8em">
-        &copy; Copyright {{ date('Y') }} - <a href="#"><b>iZabor</b></a> Diseño y Desarrollo con <i class="fa fa-heart heart"></i> <a href="//marinluis.com" target="_blank">Luis Marín</a>
+        &copy; Copyright {{ date('Y') }} - <a href="#"><b>iZabor</b></a> Diseño y Desarrollo con <i class="fa fa-heart heart"></i> & <i class="fas fa-coffee"></i> <a href="//marinluis.com" target="_blank">Luis Marín</a>
     </div>
 </footer>
 
