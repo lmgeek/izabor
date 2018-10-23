@@ -33,6 +33,7 @@ class OrderPlaced extends Mailable
     {
         return $this->to($this->order->billing_email, $this->order->billing_name)
                     ->bcc('luismarinnaveda@gmail.com')
+                    ->cco('luismarinnaveda@gmail.com')
                     ->subject('Orden de pedido de iZabor Restaurant Orden #'.$this->order->id)
                     ->markdown('emails.orders.placed');
     }
