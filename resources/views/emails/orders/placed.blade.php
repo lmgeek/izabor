@@ -1,4 +1,3 @@
-@component('mail::message')
     <table class="x_container" width="600" cellspacing="0" cellpadding="0" border="0" align="center">
         <tbody>
         <tr>
@@ -8,9 +7,9 @@
                     <tbody>
                     <tr style="text-align:left; background-color:#ffffff; border-bottom:1px solid #e6e6e6; margin:0 0 25px 0; width:100%!important; table-layout:fixed; padding:0">
                         <td>
-                            <a href="http://izabordev.herokuapp.com/images/logo.png"
+                            <a href="http://izabordev.herokuapp.com/images/"
                                target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" title="iZabor"><img
-                                        data-imagetype="External" src="https://img.pystatic.com/emails/peya-logo-es.png"
+                                        data-imagetype="External" src="http://izabordev.herokuapp.com/images/logo.png"
                                         alt="iZabor" class="x_logo"
                                         style="width:170px; display:block; margin: 0 auto;"> </a></td>
                     </tr>
@@ -21,7 +20,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <span style="display: block; text-align: center; font-family: Helvetica, Arial, sans-serif, serif, &quot;EmojiFont&quot;; font-size: 18px; color: rgb(76, 78, 78); padding: 0px 0px 5px;">Tu pedido Número <b>{{ $order->id }}</b> se está preparando.</span>
+                            <span style="display: block; text-align: center; font-family: Helvetica, Arial, sans-serif, serif, &quot;EmojiFont&quot;; font-size: 18px; color: rgb(76, 78, 78); padding: 0px 0px 5px;">Tu pedido se está preparando.</span>
                         </td>
                     </tr>
                     <tr>
@@ -33,7 +32,7 @@
                         <td>
                         <span style="display: block; text-align: center; font-family: Helvetica, Arial, sans-serif, serif, &quot;EmojiFont&quot;; font-size: 14px; color: rgb(76, 78, 78); padding: 10px 0px 20px;">Podés comunicarte con nosotros al <a
                                     href="tel:4766-7584" target="_blank" rel="noopener noreferrer"
-                                    data-auth="NotApplicable">4766-7584</a>. </span></td>
+                                    data-auth="NotApplicable">4766-7584</a> o ver el status de tu pedido desde tu perfil. </span></td>
                     </tr>
                     </tbody>
                 </table>
@@ -51,7 +50,7 @@
                                             style="font-family: Helvetica, Arial, sans-serif, serif, &quot;EmojiFont&quot;; font-size: 12px; color: rgb(76, 78, 78); float: left;">{{ $product->pivot->quantity }} x {{ $product->name }}</span>
                                 </td>
                                 <td align="right"><span
-                                            style="font-family: Helvetica, Arial, sans-serif, serif, &quot;EmojiFont&quot;; font-size: 12px; color: rgb(76, 78, 78); float: right;">${{ $product->price }}</span>
+                                            style="font-family: Helvetica, Arial, sans-serif, serif, &quot;EmojiFont&quot;; font-size: 12px; color: rgb(76, 78, 78); float: right;">$RD {{ $product->price }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -69,7 +68,7 @@
                                         style="font-family: Helvetica, Arial, sans-serif, serif, &quot;EmojiFont&quot;; font-size: 12px; color: rgb(76, 78, 78); display: block; padding: 2px 0px;">Sub-total </span>
                             </td>
                             <td align="right"><span
-                                        style="font-family: Helvetica, Arial, sans-serif, serif, &quot;EmojiFont&quot;; font-size: 12px; color: rgb(76, 78, 78); display: block; padding: 2px 0px;">${{ $order->billing_subtotal }} </span>
+                                        style="font-family: Helvetica, Arial, sans-serif, serif, &quot;EmojiFont&quot;; font-size: 12px; color: rgb(76, 78, 78); display: block; padding: 2px 0px;">$RD {{ $order->billing_subtotal }} </span>
                             </td>
                         </tr>
                         <tr>
@@ -77,7 +76,7 @@
                                         style="font-family: Helvetica, Arial, sans-serif, serif, &quot;EmojiFont&quot;; font-size: 12px; color: rgb(76, 78, 78); display: block; padding: 2px 0px;">Tax </span>
                             </td>
                             <td align="right"><span
-                                        style="font-family: Helvetica, Arial, sans-serif, serif, &quot;EmojiFont&quot;; font-size: 12px; color: rgb(76, 78, 78); display: block; padding: 2px 0px;">${{ $order->billing_tax }} </span>
+                                        style="font-family: Helvetica, Arial, sans-serif, serif, &quot;EmojiFont&quot;; font-size: 12px; color: rgb(76, 78, 78); display: block; padding: 2px 0px;">$RD {{ $order->billing_tax }} </span>
                             </td>
                         </tr>
                         <tr>
@@ -85,7 +84,7 @@
                                         style="font-family: Helvetica, Arial, sans-serif, serif, &quot;EmojiFont&quot;; font-size: 14px; color: rgb(76, 78, 78); font-weight: bold; display: block; padding: 2px 0px;">Total </span>
                             </td>
                             <td align="right"><span
-                                        style="font-family: Helvetica, Arial, sans-serif, serif, &quot;EmojiFont&quot;; font-size: 14px; color: rgb(76, 78, 78); font-weight: bold; display: block; padding: 2px 0px;">${{ $order->billing_total }} </span>
+                                        style="font-family: Helvetica, Arial, sans-serif, serif, &quot;EmojiFont&quot;; font-size: 14px; color: rgb(76, 78, 78); font-weight: bold; display: block; padding: 2px 0px;">$RD {{ $order->billing_total }} </span>
                             </td>
                         </tr>
                         </tbody>
@@ -151,4 +150,3 @@
         </tr>
         </tbody>
     </table>
-@endcomponent
