@@ -22,12 +22,19 @@ class CheckoutController extends Controller
     public function index()
     {
         //
-        if (Cart::count() > 0){
-            return view('checkout');
+//        if (Cart::count() > 0){
+//            return view('checkout');
+//        }
+
+        if (Cart::count() == 0) {
+            return redirect()->route('index');
         }
-        else{
-            return Redirect::to('/');
+
+        if (!auth()->user()) {
+            return redirect()->route('login');
         }
+
+        return view('checkout');
         
     }
 

@@ -124,8 +124,6 @@ class Carts extends Controller
     }
 
 
-
-
     /**
      * Display the specified resource.
      *
@@ -135,6 +133,18 @@ class Carts extends Controller
     public function show($id)
     {
         return view('cart');
+    }
+
+
+    /**
+     * Show the search products.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+//        $products = App\product::all();
+        return view('search');
     }
 
 

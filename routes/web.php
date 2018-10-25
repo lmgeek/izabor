@@ -17,12 +17,14 @@ use Illuminate\Support\Facades\DB;
 * Home & Web
 */
 
-Route::get('/', function () {
-    // $posts = App\Post::all();
-     $products = Order\products::all();
-     return view('welcome', compact('posts','products'));
-//    return view('welcome');
-})->name('index');
+//Route::get('/', function () {
+//    // $posts = App\Post::all();
+//     $products = Order\products::all();
+//     return view('welcome', compact('posts','products'));
+////    return view('welcome');
+//})->name('index');
+
+Route::get('/', 'ProductsController@index')->name('index');
 Route::get('/contacto', function(){
     return view('contacto');
 });
@@ -70,10 +72,11 @@ Route::get('post/{slug}', function($slug){
 /**
 * Products
 */
-Route::get('/plato/{id}', function($id){
-    $product = Order\products::where('id', '=', $id)->firstOrFail();
-    return view('products', compact('product'));
-});
+//Route::get('/plato/{id}', function($id){
+//    $product = Order\products::where('id', '=', $id)->firstOrFail();
+//    return view('products', compact('product'));
+//})->name('plato.show');
+Route::get('/plato/{id}', 'ProductsController@show')->name('plato.show');
 
 
 
@@ -136,3 +139,9 @@ Route::get('/profile', 'HomeController@profile')->name('profile');
 Route::get('/emailtest', function (){
     return view('email');
 })->name('emailtest');
+
+
+/**
+ * Search
+ */
+Route::get('/search', 'ProductsController@search')->name('search');

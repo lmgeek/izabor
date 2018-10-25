@@ -27,23 +27,40 @@
         <div class="faded-bg animated"></div>
         <div class=" col-sm-7 col-md-12">
             <div class="clearfix">
-                <div class="col-sm-12 col-md-12 col-md-offset-2">
+                <div class="col-sm-12 col-md-8 col-md-offset-2">
                     <div class="logo-title-container">
+
+                        {{--<div class="copy animated fadeIn text-center">--}}
+                            {{--<h1>¿Qué estás buscando?</h1>--}}
+                            {{--<p>Pide tu delivery ahora mismo</p>--}}
+                            {{--<div class="form-group form-group-default" id="searchGroup" style="width: 80%;">--}}
+                                {{--<div class="controls">--}}
+                                    {{--<input type="text" name="search" id="search" value=""--}}
+                                           {{--placeholder="{{ __('general.search_ppal') }}" width="50%"--}}
+                                           {{--class="form-control">--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<button type="submit" class="btn btn-block search-button">--}}
+                                {{--<span class="search">Buscar</span>--}}
+                            {{--</button>--}}
+                        {{--</div>--}}
+
 
                         <div class="copy animated fadeIn text-center">
                             <h1>¿Qué estás buscando?</h1>
-                            <p>Pide tu delivery ahora mismo</p>
-                            <div class="form-group form-group-default" id="searchGroup" style="width: 80%;">
-                                <div class="controls">
-                                    <input type="text" name="search" id="search" value=""
-                                           placeholder="{{ __('general.search_ppal') }}" width="50%"
-                                           class="form-control">
+                            <p style="margin: 0 auto;">Pide tu delivery ahora mismo</p>
+                            <form action="{{ route('search') }}" method="GET" class="search-form">
+                                <div class="form-group form-group-default" id="searchGroup" style="width: 80%;">
+                                    <div class="controls">
+                                        <input type="text" name="plato" id="plato" class="form-control" value="{{ request()->input('plato') }}" class="search-box" placeholder="{{ __('general.search_ppal') }}"  width="50%" required>
+                                    </div>
                                 </div>
-                            </div>
-                            <button type="submit" class="btn btn-block search-button">
-                                <span class="search">Buscar</span>
-                            </button>
+                                <button type="submit" class="btn btn-block search-button">
+                                    <span class="search">Buscar</span>
+                                </button>
+                            </form>
                         </div>
+
                     </div> <!-- .logo-title-container -->
                 </div>
             </div>
