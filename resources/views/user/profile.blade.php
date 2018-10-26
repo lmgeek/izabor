@@ -51,7 +51,7 @@ use Order\OrderProduct;
     //                dd($products);
                     ?>
 
-                    <h4>Pedido Nro: {{ $order->id }} fecha: {{ format('Y')  }}</h4>
+                    <h4>Pedido Nro: {{ $order->id }} fecha: {{ $order->created_at  }}</h4>
                     <div class="col-md-12">
 
                         <hr>
