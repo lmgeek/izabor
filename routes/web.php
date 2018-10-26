@@ -31,12 +31,21 @@ Route::get('/contacto', function(){
 
 
 
-
 /**
 * Auth
 */
 Auth::routes();
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+/**
+ * Perfil usuario comun
+ */
+Route::middleware('auth')->group(function (){
+    Route::get('my-account','UsersController@index')->name('users.index');
+    Route::get('profile', 'UsersController@profile')->name('profile');
+
+});
 
 
 
@@ -72,10 +81,6 @@ Route::get('post/{slug}', function($slug){
 /**
 * Products
 */
-//Route::get('/plato/{id}', function($id){
-//    $product = Order\products::where('id', '=', $id)->firstOrFail();
-//    return view('products', compact('product'));
-//})->name('plato.show');
 Route::get('/plato/{id}', 'ProductsController@show')->name('plato.show');
 
 
@@ -117,7 +122,7 @@ Route::get('/sales', function () {
 });
 
 
-/*
+/**
  * Checkout
  */
 Route::get('/checkout','CheckoutController@index')->name('checkout.index');
@@ -127,11 +132,6 @@ Route::get('/status','ConfirmationController@status')->name('status.status');
 
 
 
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/profile', 'HomeController@profile')->name('profile');
 
 /**
  * email
