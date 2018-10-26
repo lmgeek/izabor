@@ -37,7 +37,8 @@ use Order\OrderProduct;
 <div class="container">
     <div class="text-center row">
         <h1 class="text-center">Pedidos recientes</h1>
-            @if(count($orders) > 0)
+        <h4 style="float: left;">Mis pedidos ({{ $orders->count() }})</h4>
+            @if($orders->count() > 0)
                 @foreach($orders as $order)
 
                     <?php
@@ -50,7 +51,7 @@ use Order\OrderProduct;
     //                dd($products);
                     ?>
 
-                    <h4>Pedido Nro: {{ $order->id }} fecha: {{$order->created_at }}</h4>
+                    <h4>Pedido Nro: {{ $order->id }} fecha: {{ format('Y')  }}</h4>
                     <div class="col-md-12">
 
                         <hr>

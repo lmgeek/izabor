@@ -241,7 +241,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="padding: 10px">
                                     <ul class="menu-dropdown">
                                         <li>
-                                            <i class="far fa-user-circle"></i> <a href="/panel" class="dropdown-item">Mi Cuenta</a>
+                                            <i class="far fa-user-circle"></i> <a href="{{ route('profile') }}" class="dropdown-item">Mi Cuenta</a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item" href="{{ route('logout') }}"

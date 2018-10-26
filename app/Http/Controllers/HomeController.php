@@ -28,18 +28,6 @@ class HomeController extends Controller
         return view('home');
     }
 
-    /**
-     * Show the application profile.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function profile()
-    {
-        $user = Auth::User();
-        $orders = Order::where('user_id','=',$user->id)->get();
-//        dd($orders);
-        return view('user.profile', ['orders' => $orders]);
-    }
 
     /**
      * Show the application profile.
